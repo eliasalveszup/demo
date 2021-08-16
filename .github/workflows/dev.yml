@@ -44,21 +44,21 @@ jobs:
           path: target/demo-*.jar
           key: ${{ github.sha }}-dev-jar
 
-  quality:
-    runs-on: self-hosted
-    needs: [aws-login,build]
-    container:
-      image: 475383224204.dkr.ecr.us-east-1.amazonaws.com/step-image-java11-maven:latest
-      credentials:
-        username: AWS
-        password: ${{ needs.aws-login.outputs.ecr_pwd }}
-    steps:
-      - name: Sonar
-        run: mvn sonar:sonar
-          -Dsonar.projectKey=kotlin-micronaut
-          -Dsonar.host.url=http://ec2-54-163-196-183.compute-1.amazonaws.com:9000
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        working-directory: ./
+ # quality:
+ #   runs-on: self-hosted
+ #   needs: [aws-login,build]
+ #   container:
+ #     image: 475383224204.dkr.ecr.us-east-1.amazonaws.com/step-image-java11-maven:latest
+ #     credentials:
+ #       username: AWS
+ #       password: ${{ needs.aws-login.outputs.ecr_pwd }}
+ #   steps:
+ #     - name: Sonar
+ #       run: mvn sonar:sonar
+ #         -Dsonar.projectKey=kotlin-micronaut
+ #         -Dsonar.host.url=http://ec2-54-163-196-183.compute-1.amazonaws.com:9000
+ #         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+ #       working-directory: ./
   
   security:
     runs-on: self-hosted
@@ -72,7 +72,7 @@ jobs:
 
   docker-build:
     runs-on: self-hosted
-    needs: [aws-login,quality,security]
+    needs: [aws-login,security]
     container:
       image: 475383224204.dkr.ecr.us-east-1.amazonaws.com/step-image-docker:latest
       credentials:
