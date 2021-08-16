@@ -110,10 +110,10 @@ jobs:
       env:
         APP_NAME: micronaut-demo
         APP_IMAGE: micronaut-demo:latest
+        AWS_REGION: us-east-1
+        CLUSTER_NAME: orange-pipes-sandbox
     steps:
       - name: Add sandbox k8s cluster to hosts
         run: echo "54.87.1.134 DDED8C1BC51F2D4FC42588C3425440F1.gr7.us-east-1.eks.amazonaws.com" >> /etc/hosts
-      - name: Generate kubeconfig
-        run: aws eks --region us-east-1 update-kubeconfig --name orange-pipes-sandbox
       - name: Kubectl deploy
         run: sh /orange-init.sh
