@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - dev
+      - patch-1
   pull_request:
 
 jobs:
