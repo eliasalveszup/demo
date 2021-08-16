@@ -110,7 +110,7 @@ jobs:
         password: ${{ needs.aws-login.outputs.ecr_pwd }}
       env:
         APP_NAME: micronaut-demo
-        APP_IMAGE: micronaut-demo:latest
+        APP_IMAGE: 475383224204.dkr.ecr.us-east-1.amazonaws.com/micronaut-demo:dev
         APP_PORT: 8080
         AWS_REGION: us-east-1
         CLUSTER_NAME: orange-pipes-sandbox
